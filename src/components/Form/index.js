@@ -19,8 +19,8 @@ import {
 } from "./styles";
 
 const Form = ({ schema }) => {
-  const { title, description, type, properties } = schema;
-
+  const { title, description, properties } = schema;
+  console.log(properties);
   const Items = () => {
     return properties.map((p, index) => {
       //string
