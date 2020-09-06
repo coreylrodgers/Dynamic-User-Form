@@ -1,20 +1,23 @@
-import React from "react";
-
+import React, { useState } from "react";
 import {
   FormControlLabel,
   InputLabel,
   Select,
   MenuItem,
 } from "@material-ui/core";
+
 import {
   FormWrapper,
   FormTitle,
   FormInputs,
-  FormInputField,
   FormInput,
   FormCheckBox,
   FormSubtitle,
 } from "./styles";
+
+import TextField from "../../components/Form/components/TextInput/index";
+import DateInput from "../../components/Form/components/DateInput/index";
+import TextArea from "../../components/Form/components/TextArea/index";
 
 import useSignUpForm from "./components/useSignUpForm/index";
 
@@ -23,82 +26,53 @@ const Form = ({ schema }) => {
 
   const signup = () => {
     alert(`User Created!
-
            Name: ${inputs.fullName}
            Date Of Birth: ${inputs.dateOfBirth}
            Gender: ${inputs.gender}
            Mobile Number: ${inputs.mobileNumber}
            Home Number: ${inputs.homeNumber}
-           guardianConsent: ${inputs.guardianConsent}
            guardianFullName: ${inputs.guardianFullName}
            guardianContact: ${inputs.guardianContactNumber}
-           guardianGender: ${inputs.guardianGender}`);
-  }
+        `);
+  };
   const { inputs, handleInputChange, handleSubmit } = useSignUpForm(signup);
-  console.log(inputs);
 
   const Items = () => {
     return properties.map((p, index) => {
       //string
       if (p.type === "string") {
         return (
-          <FormInput key={index} large={true}>
-            <FormInputField
-              required={p.required}
-              fullWidth
-              variant="outlined"
-              size="medium"
-              label={p.title}
-              type={p.type}
-              value={inputs[p.name]}
-              name={p.name}
-              onChange={handleInputChange}
-            />
-          </FormInput>
+          <TextField
+            properties={p}
+            handleInputChange={handleInputChange}
+            value={inputs[p.name]}
+            index={index}
+          />
         );
       }
       //date
       if (p.type === "date") {
+        console.log(p.default)
         return (
-          <FormInput key={index}>
-            <FormInputField
-              required={p.required}
-              variant="outlined"
-              InputLabelProps={{
-                shrink: true,
-              }}
-              defaultValue={p.default}
-              label={p.title}
-              type={p.type}
-              fullWidth
-              name={p.name}
-              value={inputs[p.name]}
-              onChange={handleInputChange}
-            />
-          </FormInput>
+          <DateInput
+            properties={p}
+            handleInputChange={handleInputChange}
+            value={inputs[p.name]}
+            index={index}
+          />
         );
       }
       //textarea
       if (p.type === "textArea") {
         return (
-          <FormInput key={index}>
-            <FormInputField
-              required={p.required}
-              multiline="true"
-              rows={p.rows ? p.rows : 3}
-              variant="outlined"
-              InputLabelProps={{
-                shrink: true,
-              }}
-              defaultValue={p.default}
-              label={p.title}
-              type={p.type}
-              fullWidth
-              value={inputs[p.name]}
-              name={p.name}
-              onChange={handleInputChange}
-            />
-          </FormInput>
+          <TextArea
+            rows={p.rows}
+            properties={p}
+            handleInputChange={handleInputChange}
+            value={inputs[p.name]}
+            defaultValue={p.default}
+            index={index}
+          />
         );
       }
       //dropdown
@@ -151,8 +125,8 @@ const Form = ({ schema }) => {
     <form onSubmit={handleSubmit}>
       <FormWrapper>
         <FormTitle>{title}</FormTitle>
-        <FormSubtitle>{description}</FormSubtitle>
         <FormInputs>
+          <FormSubtitle>{description}</FormSubtitle>
           {Items()}
           <button type="submit">Submit the form</button>
         </FormInputs>

@@ -10,7 +10,6 @@ const FormWrapper = styled.div`
 
 const FormTitle = styled.h1`
   text-align: center;
-  margin-bottom: -10px;
 `;
 
 const FormSubtitle = styled.h2`
@@ -26,7 +25,7 @@ const FormInputs = styled.div`
   flex: 1;
   align-items: center;
   flex-direction: column;
-  padding: 3rem;
+  padding: 2rem;
 
   & > * {
     margin: 10px;

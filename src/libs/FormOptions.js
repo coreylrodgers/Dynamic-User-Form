@@ -1,6 +1,6 @@
 const signUp = {
   title: "Sign Up",
-  description: "Sign up form",
+  description: "Enter Your Details",
   type: "sign-up",
   properties: [
     {
@@ -8,13 +8,18 @@ const signUp = {
       title: "Full Name",
       required: true,
       name: "fullName",
+      validationText: "Please enter your full name",
     },
     {
       type: "date",
       title: "Date of Birth",
       required: true,
+      validation: {
+        checkAge: true,
+      },
+      default: "10-10-2001",
       minimumAge: 18,
-      default: Date.now(),
+      validationText: "You must be over 18 to sign Up",
       name: "dateOfBirth",
     },
     {
@@ -45,7 +50,6 @@ const signUp = {
     {
       type: "checkbox",
       title: "Require Guardian Consent",
-      default: false,
       name: "guardianConsent",
     },
 

@@ -35,6 +35,8 @@ const Footer = styled.div`
 `;
 
 const Logo = styled.img`
+  height: 10vmin;
+  pointer-events: none;
 `;
 
 export { Wrapper, Header, Logo, PageBody, Footer };

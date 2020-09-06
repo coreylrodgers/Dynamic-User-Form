@@ -8,7 +8,7 @@ function App() {
   return (
     <Wrapper className="App">
       <Header className="App-header">
-        <Logo src={logo} className="App-logo" alt="logo" />
+        <Logo src={logo} alt="logo" />
       </Header>
         <PageBody>
           <Form schema={signUp} />
