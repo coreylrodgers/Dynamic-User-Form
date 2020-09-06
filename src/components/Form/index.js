@@ -1,9 +1,7 @@
-import React, { useState } from "react";
-import PropTypes from "prop-types";
+import React from "react";
 
 import {
   FormControlLabel,
-  FormControl,
   InputLabel,
   Select,
   MenuItem,
@@ -18,9 +16,27 @@ import {
   FormSubtitle,
 } from "./styles";
 
+import useSignUpForm from "./components/useSignUpForm/index";
+
 const Form = ({ schema }) => {
   const { title, description, properties } = schema;
-  console.log(properties);
+
+  const signup = () => {
+    alert(`User Created!
+
+           Name: ${inputs.fullName}
+           Date Of Birth: ${inputs.dateOfBirth}
+           Gender: ${inputs.gender}
+           Mobile Number: ${inputs.mobileNumber}
+           Home Number: ${inputs.homeNumber}
+           guardianConsent: ${inputs.guardianConsent}
+           guardianFullName: ${inputs.guardianFullName}
+           guardianContact: ${inputs.guardianContactNumber}
+           guardianGender: ${inputs.guardianGender}`);
+  }
+  const { inputs, handleInputChange, handleSubmit } = useSignUpForm(signup);
+  console.log(inputs);
+
   const Items = () => {
     return properties.map((p, index) => {
       //string
@@ -28,11 +44,15 @@ const Form = ({ schema }) => {
         return (
           <FormInput key={index} large={true}>
             <FormInputField
-              fullWidth="true"
+              required={p.required}
+              fullWidth
               variant="outlined"
               size="medium"
               label={p.title}
               type={p.type}
+              value={inputs[p.name]}
+              name={p.name}
+              onChange={handleInputChange}
             />
           </FormInput>
         );
@@ -42,6 +62,7 @@ const Form = ({ schema }) => {
         return (
           <FormInput key={index}>
             <FormInputField
+              required={p.required}
               variant="outlined"
               InputLabelProps={{
                 shrink: true,
@@ -49,7 +70,10 @@ const Form = ({ schema }) => {
               defaultValue={p.default}
               label={p.title}
               type={p.type}
-              fullWidth="true"
+              fullWidth
+              name={p.name}
+              value={inputs[p.name]}
+              onChange={handleInputChange}
             />
           </FormInput>
         );
@@ -59,6 +83,7 @@ const Form = ({ schema }) => {
         return (
           <FormInput key={index}>
             <FormInputField
+              required={p.required}
               multiline="true"
               rows={p.rows ? p.rows : 3}
               variant="outlined"
@@ -68,7 +93,10 @@ const Form = ({ schema }) => {
               defaultValue={p.default}
               label={p.title}
               type={p.type}
-              fullWidth="true"
+              fullWidth
+              value={inputs[p.name]}
+              name={p.name}
+              onChange={handleInputChange}
             />
           </FormInput>
         );
@@ -77,11 +105,22 @@ const Form = ({ schema }) => {
       if (p.type === "dropdown") {
         const { options } = p;
         return (
-          <FormInput dropdown>
+          <FormInput dropdown key={index}>
             <InputLabel>{p.title}</InputLabel>
-            <Select labelId={index} id={`id_${p.index}`}>
+            <Select
+              name={p.name}
+              value={inputs ? inputs[p.name] : ""}
+              fullWidth
+              id={`id_${p.index}`}
+              onChange={handleInputChange}
+              displayEmpty
+            >
               {options.map((o) => {
-                return <MenuItem value={o.value}>{o.label}</MenuItem>;
+                return (
+                  <MenuItem key={index} value={o.value}>
+                    {o.label}
+                  </MenuItem>
+                );
               })}
             </Select>
           </FormInput>
@@ -92,25 +131,33 @@ const Form = ({ schema }) => {
       if (p.type === "checkbox") {
         return (
           <FormInput key={index}>
-            <FormControlLabel control={<FormCheckBox />} label={p.title} />
+            <FormControlLabel
+              control={
+                <FormCheckBox
+                  onChange={handleInputChange}
+                  name={p.name}
+                  value={inputs[p.name]}
+                />
+              }
+              label={p.title}
+            />
           </FormInput>
         );
       }
-      // other
-      return (
-        <FormInput key={index}>
-          <FormInputField fullWidth="true" variant="outlined" label={p.title} />
-        </FormInput>
-      );
     });
   };
 
   return (
-    <FormWrapper>
-      <FormTitle>{title}</FormTitle>
-      <FormSubtitle>{description}</FormSubtitle>
-      <FormInputs>{Items()}</FormInputs>
-    </FormWrapper>
+    <form onSubmit={handleSubmit}>
+      <FormWrapper>
+        <FormTitle>{title}</FormTitle>
+        <FormSubtitle>{description}</FormSubtitle>
+        <FormInputs>
+          {Items()}
+          <button type="submit">Submit the form</button>
+        </FormInputs>
+      </FormWrapper>
+    </form>
   );
 };
 

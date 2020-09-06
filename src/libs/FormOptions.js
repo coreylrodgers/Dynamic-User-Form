@@ -6,6 +6,8 @@ const signUp = {
     {
       type: "string",
       title: "Full Name",
+      required: true,
+      name: "fullName",
     },
     {
       type: "date",
@@ -13,53 +15,51 @@ const signUp = {
       required: true,
       minimumAge: 18,
       default: Date.now(),
+      name: "dateOfBirth",
     },
     {
       type: "dropdown",
       title: "Gender",
+      name: "gender",
       options: [
-        { label: "Male", value: 10 },
-        { label: "Female", value: 20 },
-        { label: "Prefer not to say", value: 30 },
+        { label: "Male", value: 1 },
+        { label: "Female", value: 2 },
+        { label: "Prefer not to say", value: 3 },
       ],
     },
     {
+      required: true,
       type: "string",
       title: "Mobile Number",
       default: "000000",
+      name: "mobileNumber",
     },
 
     {
       type: "string",
       title: "Home Number",
       default: "000000",
+      name: "homeNumber",
     },
 
     {
       type: "checkbox",
       title: "Require Guardian Consent",
       default: false,
+      name: "guardianConsent",
     },
 
     {
       type: "string",
       title: "Guardian Full Name",
       optional: true,
+      name: "guardianFullName",
     },
     {
       type: "string",
       title: "Guardian Contact Number",
       optional: true,
-    },
-    {
-      type: "dropdown",
-      title: "Guardian Gender",
-      options: [
-        { label: "Male", value: 10 },
-        { label: "Female", value: 20 },
-        { label: "Prefer not to say", value: 30 },
-      ],
-      optional: true,
+      name: "guardianContactNumber",
     },
   ],
 };
@@ -89,10 +89,7 @@ const feedbackForm = {
   title: "Feedback Form",
   description: "Tell us what you think?",
   properties: [
-    {
-      type: "string",
-      title: "Full Name",
-    },
+    { required: true, type: "string", title: "Full Name" },
     {
       type: "textArea",
       title: "What do you enjoy about our app?",

@@ -19,13 +19,15 @@ const FormSubtitle = styled.h2`
 `;
 
 const FormInputs = styled.div`
-  border: 1px solid aqua;
+  border-radius: 10px;
+  background-color: #fff;
   display: flex;
   flex-wrap: wrap;
   flex: 1;
   align-items: center;
   flex-direction: column;
-  border: 1px solid green;
+  padding: 3rem;
+
   & > * {
     margin: 10px;
     width: 25ch;

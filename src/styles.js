@@ -23,8 +23,6 @@ const PageBody = styled.div`
   justify-content: center;
   background: darkgrey;
   padding: 40px;
-  border: 1px solid red;
-  margin: 10px;
   min-height: 50vh;
 `;
 
