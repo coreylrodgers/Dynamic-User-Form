@@ -17,7 +17,11 @@ const signUp = {
     {
       type: "dropdown",
       title: "Gender",
-      options: ["male", "female", "prefer not to say"],
+      options: [
+        { label: "Male", value: 10 },
+        { label: "Female", value: 20 },
+        { label: "Prefer not to say", value: 30 },
+      ],
     },
     {
       type: "string",
@@ -50,6 +54,11 @@ const signUp = {
     {
       type: "dropdown",
       title: "Guardian Gender",
+      options: [
+        { label: "Male", value: 10 },
+        { label: "Female", value: 20 },
+        { label: "Prefer not to say", value: 30 },
+      ],
       optional: true,
     },
   ],
