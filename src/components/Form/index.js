@@ -22,10 +22,12 @@ import TextArea from "../../components/Form/components/TextArea/index";
 import useSignUpForm from "./components/useSignUpForm/index";
 
 const Form = ({ schema }) => {
+
   const { title, description, properties } = schema;
 
   const signup = () => {
     alert(`User Created!
+
            Name: ${inputs.fullName}
            Date Of Birth: ${inputs.dateOfBirth}
            Gender: ${inputs.gender}
@@ -52,7 +54,7 @@ const Form = ({ schema }) => {
       }
       //date
       if (p.type === "date") {
-        console.log(p.default)
+        console.log(p.default);
         return (
           <DateInput
             properties={p}

@@ -5,8 +5,9 @@ const useSignUpForm = (callback) => {
   const handleSubmit = (e) => {
     if (e) {
       e.preventDefault();
+      callback();
     }
-    callback();
+ 
   };
   const handleInputChange = (e) => {
     e.persist();
