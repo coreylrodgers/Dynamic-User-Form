@@ -20,12 +20,12 @@ import DateInput from "../../components/Form/components/DateInput/index";
 import TextArea from "../../components/Form/components/TextArea/index";
 
 import useSignUpForm from "./components/useSignUpForm/index";
+import { signUp } from "../../libs/FormOptions";
 
 const Form = ({ schema }) => {
-
   const { title, description, properties } = schema;
 
-  const signup = () => {
+  const formattedSignUp = () => {
     alert(`User Created!
 
            Name: ${inputs.fullName}
@@ -37,7 +37,15 @@ const Form = ({ schema }) => {
            guardianContact: ${inputs.guardianContactNumber}
         `);
   };
-  const { inputs, handleInputChange, handleSubmit } = useSignUpForm(signup);
+
+  const JSONResponse = () => {
+    alert(JSON.stringify(inputs));
+  };
+
+  const { inputs, handleInputChange, handleSubmit } = useSignUpForm(
+    formattedSignUp,
+    JSONResponse
+  );
 
   const Items = () => {
     return properties.map((p, index) => {
