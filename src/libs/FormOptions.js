@@ -9,6 +9,9 @@ const signUp = {
       required: true,
       name: "fullName",
       validationText: "Please enter your full name",
+      validation: {
+        checkFullName: true,
+      },
     },
     {
       type: "date",

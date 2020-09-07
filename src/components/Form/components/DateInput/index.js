@@ -25,7 +25,7 @@ const DateInput = ({ properties, handleInputChange, value, index }) => {
     minimumAge
   } = properties;
 
-  const checkAge = () => {
+  const CheckAge = () => {
     return (
       <FormInputField
         error={isOverAge(minimumAge, value)}
@@ -67,7 +67,7 @@ const DateInput = ({ properties, handleInputChange, value, index }) => {
   };
   return (
     <FormInput key={index}>
-      {validation && validation.checkAge ? checkAge() : NormalInput()}
+      {validation && validation.checkAge ? CheckAge() : NormalInput()}
     </FormInput>
   );
 };
